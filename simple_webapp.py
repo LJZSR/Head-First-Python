@@ -8,6 +8,8 @@ def hello() -> str:
 
 @app.route('/page1')
 def page1() -> str:
+    if not check_logged_in():
+        return 'You are NOT logged in.'
     return 'This is page 1.'
 
 @app.route('/page2')
@@ -17,6 +19,11 @@ def page2() -> str:
 @app.route('/page3')
 def page3() -> str:
     return 'This is page 3.'
+
+def check_logged_in() -> bool:
+    if 'logged_in' in session:
+        return True
+    return False
 
 @app.route('/login')
 def do_login() -> str:
@@ -30,7 +37,7 @@ def do_logout() -> str:
 
 @app.route('/status')
 def check_statue() -> str:
-    if 'logged_in' in session:
+    if check_logged_in():
         return 'You are currently logged in.'
     else:
         return 'You are NOT logged in.'
