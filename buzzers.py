@@ -24,5 +24,4 @@ when = {}
 dests = set(fts.values())
 for dest in dests:
     when[dest] = [k for k,v in fts.items() if v == dest]
-
 pprint.pprint(when)
